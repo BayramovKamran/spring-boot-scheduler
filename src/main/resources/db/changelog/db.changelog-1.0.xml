@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="kamranbayramov">
+
+        <createTable tableName="authors">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="books">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="bigint">
+                <constraints foreignKeyName="fk_books_author" references="authors(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="categories">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="books_categories">
+            <column name="book_id" type="bigint">
+                <constraints foreignKeyName="fk_books_categories_book" references="books(id)"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints foreignKeyName="fk_books_categories_category" references="categories(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="kamranbayramov">
+        <addPrimaryKey tableName="books_categories" columnNames="book_id, category_id"
+                       constraintName="pk_books_categories"/>
+    </changeSet>
+
+</databaseChangeLog>
