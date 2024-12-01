@@ -3,7 +3,6 @@ package org.example.springbootjpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,5 +20,5 @@ public class Author {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Book> books = new ArrayList<>();
+    private List<Book> books;
 }

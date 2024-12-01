@@ -27,7 +27,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="author_id" type="bigint">
-                <constraints foreignKeyName="fk_books_author" references="authors(id)"/>
+                <constraints foreignKeyName="fk_books_author" references="authors(id)" nullable="false"/>
             </column>
         </createTable>
 
@@ -42,10 +42,10 @@
 
         <createTable tableName="books_categories">
             <column name="book_id" type="bigint">
-                <constraints foreignKeyName="fk_books_categories_book" references="books(id)"/>
+                <constraints foreignKeyName="fk_books_categories_book" references="books(id)" nullable="false"/>
             </column>
             <column name="category_id" type="bigint">
-                <constraints foreignKeyName="fk_books_categories_category" references="categories(id)"/>
+                <constraints foreignKeyName="fk_books_categories_category" references="categories(id)" nullable="false"/>
             </column>
         </createTable>
     </changeSet>

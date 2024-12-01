@@ -3,7 +3,6 @@ package org.example.springbootjpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,14 +21,14 @@ public class Book {
     private String title;
     @Column(name = "status")
     private String status;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "books_categories",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> categories = new ArrayList<>();
+    private List<Category> categories;
 }
